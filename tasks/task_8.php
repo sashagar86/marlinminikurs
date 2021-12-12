@@ -1,3 +1,23 @@
+<?php
+$db = new PDO('mysql:host=localhost;dbname=marlin', 'root', '');
+
+$users = $db->query('SELECT * FROM users')->fetchAll();
+/*
+ *  USERS table
+ *+----+----------------+-----------+----------+
+| id | first_name     | last_name | username |
++----+----------------+-----------+----------+
+|  1 | Mark           | Otto      | @mdo     |
+|  2 | Jacob          | Thornton  | @fat     |
+|  3 | Larry          | the Bird  | @twitter |
+|  4 | Larry the Bird | Bird      | @twitter |
++----+----------------+-----------+----------+
+ *
+ *
+ */
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +39,7 @@
     </head>
     <body class="mod-bg-1 mod-nav-link ">
         <main id="js-page-content" role="main" class="page-content">
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
@@ -47,50 +67,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                            <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>Larry the Bird</td>
-                                            <td> Bird</td>
-                                            <td>@twitter</td>
-                                            <td>
-                                                <a href="show.php?id=" class="btn btn-info">Редактировать</a>
-                                                <a href="edit.php?id=" class="btn btn-warning">Изменить</a>
-                                                <a href="delete.php?id=" class="btn btn-danger">Удалить</a>
-                                            </td>
-                                        </tr>
+                                        <?php foreach ($users as $user):?>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td><?php echo $user['first_name']?></td>
+                                                <td><?php echo $user['last_name']?></td>
+                                                <td><?php echo $user['username']?></td>
+                                                <td>
+                                                    <a href="show.php?id=<?php echo $user['id']?>" class="btn btn-info">Редактировать</a>
+                                                    <a href="edit.php?id=<?php echo $user['id']?>" class="btn btn-warning">Изменить</a>
+                                                    <a href="delete.php?id=<?php echo $user['id']?>" class="btn btn-danger">Удалить</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;?>
                                     </tbody>
                                 </table>
                             </div>
