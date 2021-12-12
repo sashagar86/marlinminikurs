@@ -1,3 +1,12 @@
+<?php
+$db = new PDO('mysql:host=localhost;dbname=marlin', 'root', '');
+
+if (!empty($_POST['text'])) {
+    $db->query('INSERT INTO texts(`text`) VALUES ("'. $_POST['text'] .'")');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +44,9 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <form action="">
+                                    <form action="task_9.php" method="post">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
+                                        <input type="text" id="simpleinput" class="form-control" name="text">
                                         <button class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>
