@@ -24,15 +24,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/tasks/task_1.php">Task 1</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/tasks/task_2.php">Task 2</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/tasks/task_3.php">Task 3</a>
-            </li>
+            <?php for($i = 1; $i < 11;  $i++):?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/tasks/task_<?php echo $i?>.php">Task <?php echo $i?></a>
+                </li>
+            <?php endfor;?>
         </ul>
     </nav>
 </div>
