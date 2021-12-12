@@ -3,6 +3,21 @@ $db = new PDO('mysql:host=localhost;dbname=marlin', 'root', '');
 
 $items = $db->query('SELECT * FROM people')->fetchAll();
 
+/*
+ * +----+------------------------------+---------------------------+----------------+--------+------------------------------+------------+---------------+---------------------+
+| id | name                         | position                  | twitter        | banned | image                        | image_alt  | wrapbootstrap | wrapbootstrap_title |
++----+------------------------------+---------------------------+----------------+--------+------------------------------+------------+---------------+---------------------+
+|  1 | Sunny A. (UI/UX Expert)      | Lead Author               | @myplaneticket |      0 | img/demo/authors/sunny.png   | Sunny A.   | myorange      | Contact Sunny
+   |
+|  2 | Jos K. (ASP.NET Developer)   | Partner &amp; Contributor | @atlantez      |      0 | img/demo/authors/josh.png    | Jos K.     | Walapa        | Contact Jos
+   |
+|  3 | Jovanni L. (PHP Developer)   | Partner &amp; Contributor | @lodev09       |      1 | img/demo/authors/jovanni.png | Jovanni Lo | lodev09       | Contact Jovanni
+   |
+|  4 | Roberto R. (Rails Developer) | Partner &amp; Contributor | @sildur        |      1 | img/demo/authors/roberto.png | Jovanni Lo | sildur        | Contact Roberto
+   |
++----+------------------------------+---------------------------+----------------+--------+------------------------------+------------+---------------+---------------------+
+ * */
+
 ?>
 
 <!DOCTYPE html>
