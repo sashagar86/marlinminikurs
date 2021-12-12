@@ -1,3 +1,10 @@
+<?php
+$db = new PDO('mysql:host=localhost;dbname=marlin', 'root', '');
+
+$items = $db->query('SELECT * FROM people')->fetchAll();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
