@@ -30,6 +30,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/tasks/task_2.php">Task 2</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/tasks/task_3.php">Task 3</a>
+            </li>
         </ul>
     </nav>
 </div>
