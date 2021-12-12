@@ -17,3 +17,19 @@
         <link rel="stylesheet" media="screen, print" href="/tasks/css/fa-brands.css">
         <link rel="stylesheet" media="screen, print" href="/tasks/css/fa-regular.css">
     </head>
+<body class="mod-bg-1 mod-nav-link ">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/tasks/task_1.php">Task 1</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/tasks/task_2.php">Task 2</a>
+            </li>
+        </ul>
+    </nav>
+</div>
