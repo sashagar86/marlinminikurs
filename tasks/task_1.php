@@ -26,19 +26,19 @@
                                     </div>
                                     <?php 
                                         $items = [
-                                            'reports' => [
+                                            [
                                                 'title' => 'Reports',
                                                 'tags' => 'reports file'
                                             ],
-                                            'analytics' => [
+                                            [
                                                 'title' => 'Analytics',
                                                 'tags' => 'analytics graphs'
                                             ],
-                                            'export' => [
+                                            [
                                                 'title' => 'Export',
                                                 'tags' => 'export download'
                                             ],
-                                            'storage' => [
+                                            [
                                                 'title' => 'Storage',
                                                 'tags' => 'storage'
                                             ]
