@@ -1,3 +1,19 @@
+<?php
+$db = new PDO('mysql:host=localhost;dbname=marlin', 'root', '');
+
+if (!empty($_POST['text'])) {
+    $exist = $db->query('SELECT `text` FROM `texts` WHERE `text` = "'. $_POST['text'] .'"')->fetchAll();
+
+    if (!empty($exist)) {
+        $error = true;
+    } else {
+        $error = false;
+        $db->query('INSERT INTO texts(`text`) VALUES ("'. $_POST['text'] .'")');
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +50,14 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
+                                    <?php if ($error):?>
                                     <div class="alert alert-danger fade show" role="alert">
                                         You should check in on some of those fields below.
                                     </div>
-                                    <form action="">
+                                    <?php endif;?>
+                                    <form action="task_10.php" method="post">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
+                                        <input type="text" id="simpleinput" class="form-control" name="text">
                                         <button class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>
