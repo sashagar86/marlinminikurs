@@ -1,16 +1,30 @@
 <?php
 $db = new PDO('mysql:host=localhost;dbname=marlin', 'root', '');
+session_start();
+$text = $_POST['text'];
 
-if (!empty($_POST['text'])) {
-    $exist = $db->query('SELECT `text` FROM `texts` WHERE `text` = "'. $_POST['text'] .'"')->fetchAll();
+if (!empty($text)) {
+    $stmt = $db->prepare("SELECT * FROM texts WHERE text=:text");
+    $stmt->execute(['text' => $text]);
+    $exist = $stmt->fetch();
 
-    if (!empty($exist)) {
-        $error = true;
+    $error = !empty($exist);
+
+    if (!$error) {
+        $stmt = $db->prepare('INSERT INTO texts(`text`) VALUES (:text)');
+        $stmt->execute(['text' => $text]);
+
+        $_SESSION['message']['text'] = "Запись внесена в базу";
+        $_SESSION['message']['label'] = "success";
     } else {
-        $error = false;
-        $db->query('INSERT INTO texts(`text`) VALUES ("'. $_POST['text'] .'")');
+        $_SESSION['message']['text'] = "Такая запись уже есть";
+        $_SESSION['message']['label'] = "danger";
     }
+    header("Location: /tasks/task_10.php");
+    exit;
 }
+
+$message = $_SESSION['message'];
 
 ?>
 
@@ -50,11 +64,17 @@ if (!empty($_POST['text'])) {
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <?php if ($error):?>
-                                    <div class="alert alert-danger fade show" role="alert">
-                                        You should check in on some of those fields below.
-                                    </div>
+
+                                    <?php if (!empty($message)):?>
+                                        <div class="alert alert-<?php echo $message['label']; ?> fade show" role="alert">
+                                            <?php
+                                                echo $message['text'];
+                                                unset($_SESSION['message']);
+                                            ?>
+
+                                        </div>
                                     <?php endif;?>
+
                                     <form action="task_10.php" method="post">
                                         <label class="form-label" for="simpleinput">Text</label>
                                         <input type="text" id="simpleinput" class="form-control" name="text">
