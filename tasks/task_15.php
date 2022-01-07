@@ -57,7 +57,7 @@ $dir = getUploadsDir();
                                         <form action="handlers/task_15_handler.php" enctype="multipart/form-data" method="post">
                                             <div class="form-group">
                                                 <label class="form-label" for="simpleinput">Image</label>
-                                                <input type="file" id="simpleinput" class="form-control" name="image">
+                                                <input type="file" id="simpleinput" class="form-control" name="images[]" multiple>
                                             </div>
                                             <button class="btn btn-success mt-3">Submit</button>
                                         </form>
@@ -89,6 +89,7 @@ $dir = getUploadsDir();
                                                 <?php if (file_exists($dir . $image['image'])):?>
                                                         <div class="col-md-3 image">
                                                             <img src="/uploads/<?php echo $image['image']; ?>" class="img-fluid">
+                                                            <a class="btn btn-danger" href="handlers/task_15_1_handler.php/?image=<?php echo $image['image']?>" onclick="confirm('Вы уверены?');">Удалить</a>
                                                         </div>
                                                 <?php endif;?>
                                             <?php endforeach;?>

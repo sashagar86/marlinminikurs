@@ -4,7 +4,7 @@ session_start();
 
 $error = false;
 
-if (!empty($_FILES) && empty($_FILES['image']['name'])) {
+if (!empty($_FILES) && empty($_FILES['images']['name'][0])) {
     setMessage('Выберите файл');
     $error = true;
 }
@@ -14,19 +14,24 @@ if ($error) {
     exit;
 }
 
-$filename = uploadFile();
+if(!empty($_FILES['images']['name'][0])) {
+    $count = count($_FILES['images']['name']);
+    for($i = 0; $i <= $count; $i++) {
+        $filename = uploadFile($_FILES['images']['name'][$i], $_FILES['images']['tmp_name'][$i]);
 
-if ($filename) {
-    insertImageInDb($filename);
+        if ($filename) {
+            insertImageInDb($filename);
+        }
+    }
 }
 
-function uploadFile() {
-    $name = $_FILES['image']['name'];
-    $name = explode('.', $name);
-    $extension = '.' . end($name);
+if (!empty($_GET['image'])) {
+    deleteFile($_GET['image']);
+}
 
-    $tmp_name = $_FILES['image']['tmp_name'];
-    $filename = uniqid() . $extension;
+function uploadFile($image, $tmp_name) {
+    $file = pathinfo($image);
+    $filename = uniqid() . $file['extension'];
     $dir = getUploadsDir();
 
     if(move_uploaded_file($tmp_name, $dir . $filename)) {
@@ -35,6 +40,21 @@ function uploadFile() {
     }
 
     return false;
+}
+
+function deleteFile($filename) {
+    $file = getUploadsDir() . $filename;
+
+    $db = new PDO('mysql:host=localhost;dbname=marlin', 'root', '');
+    $sql = "DELETE FROM images WHERE image = :image";
+    $sql = $db->prepare($sql);
+    $delete = $sql->execute(['image' => $filename]);
+
+    if (file_exists($file) && $delete) {
+        unlink($file);
+    }
+    setMessage("Файл {$filename} успешно удален", 'success');
+    header("Location: /tasks/task_15.php");
 }
 
 function insertImageInDb($filename) {
