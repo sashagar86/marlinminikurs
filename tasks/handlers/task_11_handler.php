@@ -28,8 +28,10 @@ if (!$error) {
     $error = !empty($exist);
 
     if (!$error) {
-        $stmt = $db->prepare('INSERT INTO `members`(`email`, `password`) VALUES (:email, :password)');
-        $stmt->execute(['email' => $email, 'password' => password_hash($password)]);
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $db->prepare("INSERT INTO `members`(`email`, `password`) VALUES (:email, :password)");
+
+        $stmt->execute(['email' => $email, 'password' => $password]);
 
         setMessage('Этот эл адрес добавлен в базу', 'success');
 
