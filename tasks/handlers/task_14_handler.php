@@ -29,10 +29,9 @@ if (!$error) {
         if (password_verify($password, $hash)) {
             setMessage('Логин выполнен', 'success');
             $_SESSION['user'] = $user;
+            header("Location: /tasks/task_14_1.php");
+            exit;
         }
-
-        header("Location: /tasks/task_14.php");
-        exit;
     }
 
     setMessage('Неверный логин или пароль');
