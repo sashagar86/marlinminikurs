@@ -3,8 +3,8 @@
     $messages = $_SESSION['messages'];
     $error = $_SESSION['error'];
     $email = $_SESSION['email'];
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,16 +51,19 @@
                                             </div>
                                         <?php endforeach;?>
                                     <?php endif;?>
-                                    <form action="handlers/task_14_handler.php" method="post">
-                                        <div class="form-group">
-                                        	<label class="form-label" for="simpleinput">Email</label>
-                                        <input type="text" id="simpleinput" class="form-control" name="email">
-                                        </div>
 
-                                        <label class="form-label" for="simpleinput">Password</label>
-                                        <input type="password" id="simpleinput" class="form-control" name="password">
-                                        <button class="btn btn-success mt-3">Submit</button>
-                                    </form>
+                                    <?php if(empty($_SESSION['user'])):?>
+                                        <form action="handlers/task_14_handler.php" method="post">
+                                            <div class="form-group">
+                                                <label class="form-label" for="simpleinput">Email</label>
+                                            <input type="text" id="simpleinput" class="form-control" name="email">
+                                            </div>
+
+                                            <label class="form-label" for="simpleinput">Password</label>
+                                            <input type="password" id="simpleinput" class="form-control" name="password">
+                                            <button class="btn btn-success mt-3">Submit</button>
+                                        </form>
+                                    <?php endif;?>
                                 </div>
                             </div>
                         </div>

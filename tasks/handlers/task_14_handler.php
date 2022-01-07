@@ -28,6 +28,7 @@ if (!$error) {
 
         if (password_verify($password, $hash)) {
             setMessage('Логин выполнен', 'success');
+            $_SESSION['user'] = $user;
         }
 
         header("Location: /tasks/task_14.php");
